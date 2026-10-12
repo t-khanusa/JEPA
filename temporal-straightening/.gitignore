@@ -6,12 +6,10 @@ data
 wandb
 checkpoints
 checkpoints_smoke
-logs
 *.pth
 *.pt
 *.ckpt
 *.slurm
-*.sh
 # env/wall/data is a source package (WallDatasetConfig, layouts), not a dataset dir
 !env/wall/data/
 !env/wall/data/*.py

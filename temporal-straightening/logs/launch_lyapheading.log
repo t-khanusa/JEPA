@@ -1,0 +1,2 @@
+[gpu 1] training.straighten=lyapheading1e-1 -> logs/aggcos_vs_lyap_20261010_015554/lyapheading1e-1.log
+[gpu 2] training.straighten=lyapheading2e-1 -> logs/aggcos_vs_lyap_20261010_015554/lyapheading2e-1.log

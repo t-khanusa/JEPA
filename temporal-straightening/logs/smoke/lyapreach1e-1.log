@@ -1,0 +1,412 @@
+/project/khanhnt/JEPA/temporal-straightening/custom_resolvers.py:4: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_path=None)
+[2026-10-09 10:19:16,715][__main__][INFO] - Model saved dir: /project/khanhnt/JEPA/temporal-straightening/checkpoints_smoke/test/umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05
+[2026-10-09 10:19:16,841][__main__][INFO] - Accelerate mixed precision: bf16
+[2026-10-09 10:19:16,841][__main__][INFO] - rank: 0  model_name: /project/khanhnt/JEPA/temporal-straightening/checkpoints_smoke/test/umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05_f5_h3_p1
+[2026-10-09 10:19:16,841][__main__][INFO] - device: cuda   model_name: /project/khanhnt/JEPA/temporal-straightening/checkpoints_smoke/test/umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05_f5_h3_p1
+[2026-10-09 10:19:16,841][__main__][INFO] - Decoder training will start at epoch 1
+[2026-10-09 10:19:16,853][__main__][INFO] - Resuming Wandb run 60qz2uxv
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id 60qz2uxv.
+wandb: Tracking run with wandb version 0.13.1
+wandb: W&B syncing is set to `offline` in this directory.  
+wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+[2026-10-09 10:19:22,792][__main__][INFO] - Loading dataset from /project/khanhnt/temporal-straightening/data/point_maze ...
+Loaded 40 rollouts
+[[22, 9, 32, 15, 0, 3, 8, 18, 14, 13, 38, 2, 7, 4, 23, 37, 27, 29, 35, 17, 19, 25, 6, 21, 12, 10, 16, 39, 24, 33, 11, 34, 28, 20, 26, 31], [30, 36, 1, 5]]
+[2026-10-09 10:19:22,897][__main__][INFO] - dataloader batch size: 32
+[2026-10-09 10:19:22,898][__main__][INFO] - Train encoder, predictor, decoder:            True            True            True
+Using cache found in /home/khanhnt/.cache/torch/hub/facebookresearch_dinov2_b48308a
+[2026-10-09 10:19:22,925][dinov2][INFO] - using MLP layer as FFN
+[2026-10-09 10:19:23,354][__main__][INFO] - Encoder base_model is frozen.
+[2026-10-09 10:19:23,354][__main__][INFO] - Encoder base_model frozen; non-backbone encoder modules are trainable.
+using 3d prop position use_3d_pos=False
+Proprio encoder type: <class 'models.proprio.ProprioceptiveEmbedding'>
+using 3d prop position use_3d_pos=False
+Action encoder type: <class 'models.proprio.ProprioceptiveEmbedding'>
+[2026-10-09 10:19:23,569][__main__][INFO] - Passing projector_cfg to decoder
+[2026-10-09 10:19:23,649][models.visual_world_model][INFO] - num_action_repeat: 1
+[2026-10-09 10:19:23,650][models.visual_world_model][INFO] - num_proprio_repeat: 1
+[2026-10-09 10:19:23,650][models.visual_world_model][INFO] - proprio encoder: ProprioceptiveEmbedding(
+  (patch_embed): Conv1d(4, 10, kernel_size=(1,), stride=(1,))
+  (norm): LayerNorm((10,), eps=1e-05, elementwise_affine=True)
+)
+[2026-10-09 10:19:23,650][models.visual_world_model][INFO] - action encoder: ProprioceptiveEmbedding(
+  (patch_embed): Conv1d(10, 10, kernel_size=(1,), stride=(1,))
+  (norm): LayerNorm((10,), eps=1e-05, elementwise_affine=True)
+)
+[2026-10-09 10:19:23,650][models.visual_world_model][INFO] - proprio_dim: 10, after repeat: 10
+[2026-10-09 10:19:23,650][models.visual_world_model][INFO] - action_dim: 10, after repeat: 10
+[2026-10-09 10:19:23,650][models.visual_world_model][INFO] - emb_dim: 28
+[2026-10-09 10:19:23,650][models.visual_world_model][INFO] - Straightening enabled: mode=lyapreach, scale=0.1
+[2026-10-09 10:19:23,650][models.visual_world_model][INFO] - Stop-grad enabled: True
+[2026-10-09 10:19:23,650][models.visual_world_model][INFO] - VCReg enabled: False, apply_to=enc, std_coeff=0.0, cov_coeff=0.0
+[2026-10-09 10:19:23,650][models.visual_world_model][INFO] - Model emb_dim: 28
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable params: 14034667 / 36091243
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.conv_layers.0.weight shape=(192, 384, 3, 3)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.conv_layers.0.bias shape=(192,)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.conv_layers.1.weight shape=(8, 192, 3, 3)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.conv_layers.1.bias shape=(8,)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.batch_norm_layers.0.weight shape=(192,)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.batch_norm_layers.0.bias shape=(192,)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.batch_norm_layers.1.weight shape=(8,)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.batch_norm_layers.1.bias shape=(8,)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.layer_norm_layers.0.weight shape=(192,)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.layer_norm_layers.0.bias shape=(192,)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.layer_norm_layers.1.weight shape=(8,)
+[2026-10-09 10:19:23,652][__main__][INFO] - [model] trainable: encoder.projector.layer_norm_layers.1.bias shape=(8,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: encoder.agg_mlp.0.weight shape=(512, 1568)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: encoder.agg_mlp.0.bias shape=(512,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: encoder.agg_mlp.2.weight shape=(512, 512)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: encoder.agg_mlp.2.bias shape=(512,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: encoder.agg_mlp.4.weight shape=(128, 512)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: encoder.agg_mlp.4.bias shape=(128,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: encoder.agg_post_norm.weight shape=(128,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: encoder.agg_post_norm.bias shape=(128,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: proprio_encoder.patch_embed.weight shape=(10, 4, 1)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: proprio_encoder.patch_embed.bias shape=(10,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: proprio_encoder.norm.weight shape=(10,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: proprio_encoder.norm.bias shape=(10,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: action_encoder.patch_embed.weight shape=(10, 10, 1)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: action_encoder.patch_embed.bias shape=(10,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: action_encoder.norm.weight shape=(10,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: action_encoder.norm.bias shape=(10,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: decoder.proj_decoder.deconv_layers.0.weight shape=(8, 192, 3, 3)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: decoder.proj_decoder.deconv_layers.0.bias shape=(192,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: decoder.proj_decoder.deconv_layers.1.weight shape=(192, 384, 3, 3)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: decoder.proj_decoder.deconv_layers.1.bias shape=(384,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.0.weight shape=(384, 384, 3, 3)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.0.bias shape=(384,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.1.conv.1.weight shape=(128, 384, 3, 3)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.1.conv.1.bias shape=(128,)
+[2026-10-09 10:19:23,653][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.1.conv.3.weight shape=(384, 128, 1, 1)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.1.conv.3.bias shape=(384,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.2.conv.1.weight shape=(128, 384, 3, 3)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.2.conv.1.bias shape=(128,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.2.conv.3.weight shape=(384, 128, 1, 1)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.2.conv.3.bias shape=(384,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.3.conv.1.weight shape=(128, 384, 3, 3)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.3.conv.1.bias shape=(128,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.3.conv.3.weight shape=(384, 128, 1, 1)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.3.conv.3.bias shape=(384,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.4.conv.1.weight shape=(128, 384, 3, 3)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.4.conv.1.bias shape=(128,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.4.conv.3.weight shape=(384, 128, 1, 1)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.4.conv.3.bias shape=(384,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.6.weight shape=(384, 192, 4, 4)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.6.bias shape=(192,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.8.weight shape=(192, 384, 4, 4)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.8.bias shape=(384,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.dec.blocks.0.weight shape=(384, 384, 3, 3)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.dec.blocks.0.bias shape=(384,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.dec.blocks.1.conv.1.weight shape=(128, 384, 3, 3)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.dec.blocks.1.conv.1.bias shape=(128,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.dec.blocks.1.conv.3.weight shape=(384, 128, 1, 1)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.dec.blocks.1.conv.3.bias shape=(384,)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.dec.blocks.2.conv.1.weight shape=(128, 384, 3, 3)
+[2026-10-09 10:19:23,654][__main__][INFO] - [model] trainable: decoder.dec.blocks.2.conv.1.bias shape=(128,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.2.conv.3.weight shape=(384, 128, 1, 1)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.2.conv.3.bias shape=(384,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.3.conv.1.weight shape=(128, 384, 3, 3)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.3.conv.1.bias shape=(128,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.3.conv.3.weight shape=(384, 128, 1, 1)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.3.conv.3.bias shape=(384,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.4.conv.1.weight shape=(128, 384, 3, 3)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.4.conv.1.bias shape=(128,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.4.conv.3.weight shape=(384, 128, 1, 1)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.4.conv.3.bias shape=(384,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.6.weight shape=(384, 192, 4, 4)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.6.bias shape=(192,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.8.weight shape=(192, 3, 4, 4)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: decoder.dec.blocks.8.bias shape=(3,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: predictor.pos_embedding shape=(1, 588, 28)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: predictor.transformer.norm.weight shape=(28,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: predictor.transformer.norm.bias shape=(28,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.0.norm.weight shape=(28,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.0.norm.bias shape=(28,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.0.to_qkv.weight shape=(3072, 28)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.0.to_out.0.weight shape=(28, 1024)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.0.to_out.0.bias shape=(28,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.0.weight shape=(28,)
+[2026-10-09 10:19:23,655][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.0.bias shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.1.weight shape=(2048, 28)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.1.bias shape=(2048,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.4.weight shape=(28, 2048)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.4.bias shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.0.norm.weight shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.0.norm.bias shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.0.to_qkv.weight shape=(3072, 28)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.0.to_out.0.weight shape=(28, 1024)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.0.to_out.0.bias shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.0.weight shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.0.bias shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.1.weight shape=(2048, 28)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.1.bias shape=(2048,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.4.weight shape=(28, 2048)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.4.bias shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.0.norm.weight shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.0.norm.bias shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.0.to_qkv.weight shape=(3072, 28)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.0.to_out.0.weight shape=(28, 1024)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.0.to_out.0.bias shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.0.weight shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.0.bias shape=(28,)
+[2026-10-09 10:19:23,656][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.1.weight shape=(2048, 28)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.1.bias shape=(2048,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.4.weight shape=(28, 2048)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.4.bias shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.0.norm.weight shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.0.norm.bias shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.0.to_qkv.weight shape=(3072, 28)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.0.to_out.0.weight shape=(28, 1024)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.0.to_out.0.bias shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.0.weight shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.0.bias shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.1.weight shape=(2048, 28)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.1.bias shape=(2048,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.4.weight shape=(28, 2048)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.4.bias shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.0.norm.weight shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.0.norm.bias shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.0.to_qkv.weight shape=(3072, 28)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.0.to_out.0.weight shape=(28, 1024)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.0.to_out.0.bias shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.0.weight shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.0.bias shape=(28,)
+[2026-10-09 10:19:23,657][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.1.weight shape=(2048, 28)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.1.bias shape=(2048,)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.4.weight shape=(28, 2048)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.4.bias shape=(28,)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.0.norm.weight shape=(28,)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.0.norm.bias shape=(28,)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.0.to_qkv.weight shape=(3072, 28)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.0.to_out.0.weight shape=(28, 1024)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.0.to_out.0.bias shape=(28,)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.0.weight shape=(28,)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.0.bias shape=(28,)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.1.weight shape=(2048, 28)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.1.bias shape=(2048,)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.4.weight shape=(28, 2048)
+[2026-10-09 10:19:23,658][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.4.bias shape=(28,)
+[2026-10-09 10:19:23,661][__main__][INFO] - Epoch 1 decoder_active=True (train_decoder=True, decoder_start_epoch=1)
+Epoch 1 Train:   0%|          | 0/92 [00:00<?, ?it/s][2026-10-09 10:19:33,106][__main__][INFO] - Saved model to /project/khanhnt/JEPA/temporal-straightening/checkpoints_smoke/test/umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05
+Epoch 1 Train:   1%|          | 1/92 [00:09<14:19,  9.44s/it]Epoch 1 Train:   2%|▏         | 2/92 [00:10<06:22,  4.25s/it]Epoch 1 Train:   3%|▎         | 3/92 [00:10<03:48,  2.56s/it]Epoch 1 Train:   4%|▍         | 4/92 [00:11<02:35,  1.77s/it]Epoch 1 Train:   5%|▌         | 5/92 [00:11<01:56,  1.33s/it]Epoch 1 Train:   7%|▋         | 6/92 [00:12<01:32,  1.07s/it]Epoch 1 Train:   8%|▊         | 7/92 [00:12<01:16,  1.11it/s]Epoch 1 Train:   9%|▊         | 8/92 [00:13<01:06,  1.26it/s]Epoch 1 Train:  10%|▉         | 9/92 [00:13<00:59,  1.39it/s]Epoch 1 Train:  11%|█         | 10/92 [00:14<00:54,  1.49it/s]Epoch 1 Train:  12%|█▏        | 11/92 [00:15<00:51,  1.58it/s]Epoch 1 Train:  13%|█▎        | 12/92 [00:15<00:48,  1.64it/s]Epoch 1 Train:  14%|█▍        | 13/92 [00:16<00:46,  1.68it/s]Epoch 1 Train:  15%|█▌        | 14/92 [00:16<00:45,  1.72it/s]Epoch 1 Train:  16%|█▋        | 15/92 [00:17<00:44,  1.74it/s]Epoch 1 Train:  17%|█▋        | 16/92 [00:17<00:43,  1.76it/s]Epoch 1 Train:  18%|█▊        | 17/92 [00:18<00:42,  1.77it/s]Epoch 1 Train:  20%|█▉        | 18/92 [00:18<00:41,  1.78it/s]Epoch 1 Train:  21%|██        | 19/92 [00:19<00:41,  1.75it/s]Epoch 1 Train:  22%|██▏       | 20/92 [00:20<00:40,  1.76it/s]Epoch 1 Train:  23%|██▎       | 21/92 [00:20<00:40,  1.77it/s]Epoch 1 Train:  24%|██▍       | 22/92 [00:21<00:39,  1.78it/s]Epoch 1 Train:  25%|██▌       | 23/92 [00:21<00:38,  1.78it/s]Epoch 1 Train:  26%|██▌       | 24/92 [00:22<00:38,  1.79it/s]Epoch 1 Train:  27%|██▋       | 25/92 [00:22<00:37,  1.79it/s]Epoch 1 Train:  28%|██▊       | 26/92 [00:23<00:36,  1.79it/s]Epoch 1 Train:  29%|██▉       | 27/92 [00:24<00:36,  1.79it/s]Epoch 1 Train:  30%|███       | 28/92 [00:24<00:35,  1.79it/s]Epoch 1 Train:  32%|███▏      | 29/92 [00:25<00:35,  1.79it/s]Epoch 1 Train:  33%|███▎      | 30/92 [00:25<00:34,  1.79it/s]Epoch 1 Train:  34%|███▎      | 31/92 [00:26<00:34,  1.79it/s]Epoch 1 Train:  35%|███▍      | 32/92 [00:26<00:33,  1.79it/s]Epoch 1 Train:  36%|███▌      | 33/92 [00:27<00:32,  1.79it/s]Epoch 1 Train:  37%|███▋      | 34/92 [00:27<00:32,  1.79it/s]Epoch 1 Train:  38%|███▊      | 35/92 [00:28<00:31,  1.79it/s]Epoch 1 Train:  39%|███▉      | 36/92 [00:29<00:31,  1.79it/s]Epoch 1 Train:  40%|████      | 37/92 [00:29<00:30,  1.79it/s]Epoch 1 Train:  41%|████▏     | 38/92 [00:30<00:30,  1.79it/s]Epoch 1 Train:  42%|████▏     | 39/92 [00:30<00:29,  1.79it/s]Epoch 1 Train:  43%|████▎     | 40/92 [00:31<00:29,  1.79it/s]Epoch 1 Train:  45%|████▍     | 41/92 [00:31<00:28,  1.79it/s]Epoch 1 Train:  46%|████▌     | 42/92 [00:32<00:27,  1.79it/s]Epoch 1 Train:  47%|████▋     | 43/92 [00:32<00:27,  1.79it/s]Epoch 1 Train:  48%|████▊     | 44/92 [00:33<00:26,  1.79it/s]Epoch 1 Train:  49%|████▉     | 45/92 [00:34<00:26,  1.79it/s]Epoch 1 Train:  50%|█████     | 46/92 [00:34<00:25,  1.79it/s]Epoch 1 Train:  51%|█████     | 47/92 [00:35<00:25,  1.79it/s]Epoch 1 Train:  52%|█████▏    | 48/92 [00:35<00:24,  1.79it/s]Epoch 1 Train:  53%|█████▎    | 49/92 [00:36<00:24,  1.79it/s]Epoch 1 Train:  54%|█████▍    | 50/92 [00:36<00:23,  1.79it/s]Epoch 1 Train:  55%|█████▌    | 51/92 [00:37<00:22,  1.79it/s]Epoch 1 Train:  57%|█████▋    | 52/92 [00:38<00:22,  1.79it/s]Epoch 1 Train:  58%|█████▊    | 53/92 [00:38<00:21,  1.78it/s]Epoch 1 Train:  59%|█████▊    | 54/92 [00:39<00:21,  1.78it/s]Epoch 1 Train:  60%|█████▉    | 55/92 [00:39<00:20,  1.78it/s]Epoch 1 Train:  61%|██████    | 56/92 [00:40<00:20,  1.78it/s]Epoch 1 Train:  62%|██████▏   | 57/92 [00:40<00:19,  1.78it/s]Epoch 1 Train:  63%|██████▎   | 58/92 [00:41<00:19,  1.78it/s]Epoch 1 Train:  64%|██████▍   | 59/92 [00:41<00:18,  1.78it/s]Epoch 1 Train:  65%|██████▌   | 60/92 [00:42<00:17,  1.78it/s]Epoch 1 Train:  66%|██████▋   | 61/92 [00:43<00:17,  1.78it/s]Epoch 1 Train:  67%|██████▋   | 62/92 [00:43<00:16,  1.78it/s]Epoch 1 Train:  68%|██████▊   | 63/92 [00:44<00:16,  1.78it/s]Epoch 1 Train:  70%|██████▉   | 64/92 [00:44<00:15,  1.78it/s]Epoch 1 Train:  71%|███████   | 65/92 [00:45<00:15,  1.78it/s]Epoch 1 Train:  72%|███████▏  | 66/92 [00:45<00:14,  1.78it/s]Epoch 1 Train:  73%|███████▎  | 67/92 [00:46<00:14,  1.78it/s]Epoch 1 Train:  74%|███████▍  | 68/92 [00:46<00:13,  1.78it/s]Epoch 1 Train:  75%|███████▌  | 69/92 [00:47<00:12,  1.78it/s]Epoch 1 Train:  76%|███████▌  | 70/92 [00:48<00:12,  1.78it/s]Epoch 1 Train:  77%|███████▋  | 71/92 [00:48<00:11,  1.78it/s]Epoch 1 Train:  78%|███████▊  | 72/92 [00:49<00:11,  1.78it/s]Epoch 1 Train:  79%|███████▉  | 73/92 [00:49<00:10,  1.78it/s]Epoch 1 Train:  80%|████████  | 74/92 [00:50<00:10,  1.78it/s]Epoch 1 Train:  82%|████████▏ | 75/92 [00:50<00:09,  1.78it/s]Epoch 1 Train:  83%|████████▎ | 76/92 [00:51<00:08,  1.78it/s]Epoch 1 Train:  84%|████████▎ | 77/92 [00:52<00:08,  1.78it/s]Epoch 1 Train:  85%|████████▍ | 78/92 [00:52<00:07,  1.78it/s]Epoch 1 Train:  86%|████████▌ | 79/92 [00:53<00:07,  1.78it/s]Epoch 1 Train:  87%|████████▋ | 80/92 [00:53<00:06,  1.78it/s]Epoch 1 Train:  88%|████████▊ | 81/92 [00:54<00:06,  1.78it/s]Epoch 1 Train:  89%|████████▉ | 82/92 [00:54<00:05,  1.78it/s]Epoch 1 Train:  90%|█████████ | 83/92 [00:55<00:05,  1.78it/s]Epoch 1 Train:  91%|█████████▏| 84/92 [00:55<00:04,  1.78it/s]Epoch 1 Train:  92%|█████████▏| 85/92 [00:56<00:03,  1.78it/s]Epoch 1 Train:  93%|█████████▎| 86/92 [00:57<00:03,  1.77it/s]Epoch 1 Train:  95%|█████████▍| 87/92 [00:57<00:02,  1.78it/s]Epoch 1 Train:  96%|█████████▌| 88/92 [00:58<00:02,  1.78it/s]Epoch 1 Train:  97%|█████████▋| 89/92 [00:58<00:01,  1.78it/s]Epoch 1 Train:  98%|█████████▊| 90/92 [00:59<00:01,  1.78it/s]Epoch 1 Train:  99%|█████████▉| 91/92 [00:59<00:00,  1.78it/s]Epoch 1 Train: 100%|██████████| 92/92 [01:00<00:00,  2.21it/s]Epoch 1 Train: 100%|██████████| 92/92 [01:00<00:00,  1.53it/s]
+Epoch 1 Valid:   0%|          | 0/11 [00:00<?, ?it/s]Epoch 1 Valid:   9%|▉         | 1/11 [00:07<01:16,  7.62s/it]Epoch 1 Valid:  18%|█▊        | 2/11 [00:07<00:30,  3.34s/it]Epoch 1 Valid:  27%|██▋       | 3/11 [00:08<00:15,  1.95s/it]Epoch 1 Valid:  36%|███▋      | 4/11 [00:08<00:09,  1.30s/it]Epoch 1 Valid:  45%|████▌     | 5/11 [00:08<00:05,  1.07it/s]Epoch 1 Valid:  55%|█████▍    | 6/11 [00:09<00:03,  1.39it/s]Epoch 1 Valid:  64%|██████▎   | 7/11 [00:09<00:02,  1.72it/s]Epoch 1 Valid:  73%|███████▎  | 8/11 [00:09<00:01,  2.04it/s]Epoch 1 Valid:  82%|████████▏ | 9/11 [00:10<00:00,  2.33it/s]Epoch 1 Valid:  91%|█████████ | 10/11 [00:10<00:00,  2.58it/s]Epoch 1 Valid: 100%|██████████| 11/11 [00:10<00:00,  1.06it/s]
+[2026-10-09 10:20:47,148][__main__][INFO] - Epoch 1  Training loss: 0.5121                  Validation loss: 0.3683
+[2026-10-09 10:20:48,819][__main__][INFO] - Saved model to /project/khanhnt/JEPA/temporal-straightening/checkpoints_smoke/test/umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.000 MB of 0.000 MB uploaded (0.000 MB deduped)wandb: \ 0.000 MB of 0.000 MB uploaded (0.000 MB deduped)wandb: | 0.000 MB of 0.000 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:                                   epoch ▁▁
+wandb:                                    iter ▁
+wandb:                 train_decoder_loss_pred █▁
+wandb:        train_decoder_loss_reconstructed █▁
+wandb:           train_decoder_recon_loss_pred █▁
+wandb:  train_decoder_recon_loss_reconstructed █▁
+wandb:              train_decoder_vq_loss_pred ▁▁
+wandb:     train_decoder_vq_loss_reconstructed ▁▁
+wandb:              train_geo_V_transverse_max ▁█
+wandb:             train_geo_V_transverse_mean ▁█
+wandb:               train_geo_chord_over_path ▁█
+wandb:                       train_geo_cos_sim ▁█
+wandb:                     train_geo_curvature █▁
+wandb:            train_geo_goal_monotone_rate ▁█
+wandb:                    train_geo_latent_std ▁█
+wandb:                  train_geo_p_over_L_mid ▁█
+wandb:        train_geo_progress_monotone_rate ▁█
+wandb:                       train_img_l1_pred ▁▁
+wandb:              train_img_l1_reconstructed ▁▁
+wandb:                       train_img_l2_pred ▁▁
+wandb:              train_img_l2_reconstructed ▁▁
+wandb:                    train_img_lpips_pred ▁▁
+wandb:           train_img_lpips_reconstructed ▁▁
+wandb:                      train_img_mse_pred ▁▁
+wandb:             train_img_mse_reconstructed ▁▁
+wandb:                     train_img_psnr_pred ▁▁
+wandb:            train_img_psnr_reconstructed ▁▁
+wandb:                     train_img_ssim_pred ▁▁
+wandb:            train_img_ssim_reconstructed ▁▁
+wandb:                              train_loss █▁
+wandb:                       train_lyap_V_mean ▁█
+wandb:                   train_lyap_V_progress █▁
+wandb:                 train_lyap_V_transverse ▁█
+wandb:                   train_lyap_chord_norm ▁█
+wandb:                     train_lyap_lag_rate █▁
+wandb:                     train_lyap_p_over_L ▁█
+wandb:                train_lyap_raw_violation ▁█
+wandb:                   train_lyap_valid_frac ▁▁
+wandb:                    train_lyap_viol_rate █▁
+wandb:   train_lyapunov_loss_used_for_training ▁█
+wandb:                            train_z_loss █▁
+wandb:                train_z_proprio_err_full ▁▁
+wandb:                train_z_proprio_err_pred ▁▁
+wandb:             train_z_proprio_err_rollout ▁
+wandb: train_z_proprio_err_rollout_1framestart ▁
+wandb:                    train_z_proprio_loss █▁
+wandb:                 train_z_visual_err_full ▁▁
+wandb:                 train_z_visual_err_pred ▁▁
+wandb:              train_z_visual_err_rollout ▁
+wandb:  train_z_visual_err_rollout_1framestart ▁
+wandb:                     train_z_visual_loss █▁
+wandb:                   val_decoder_loss_pred ▁
+wandb:          val_decoder_loss_reconstructed ▁
+wandb:             val_decoder_recon_loss_pred ▁
+wandb:    val_decoder_recon_loss_reconstructed ▁
+wandb:                val_decoder_vq_loss_pred ▁
+wandb:       val_decoder_vq_loss_reconstructed ▁
+wandb:                val_geo_V_transverse_max ▁
+wandb:               val_geo_V_transverse_mean ▁
+wandb:                 val_geo_chord_over_path ▁
+wandb:                         val_geo_cos_sim ▁
+wandb:                       val_geo_curvature ▁
+wandb:              val_geo_goal_monotone_rate ▁
+wandb:                      val_geo_latent_std ▁
+wandb:                    val_geo_p_over_L_mid ▁
+wandb:          val_geo_progress_monotone_rate ▁
+wandb:                         val_img_l1_pred ▁
+wandb:                val_img_l1_reconstructed ▁
+wandb:                         val_img_l2_pred ▁
+wandb:                val_img_l2_reconstructed ▁
+wandb:                      val_img_lpips_pred ▁
+wandb:             val_img_lpips_reconstructed ▁
+wandb:                        val_img_mse_pred ▁
+wandb:               val_img_mse_reconstructed ▁
+wandb:                       val_img_psnr_pred ▁
+wandb:              val_img_psnr_reconstructed ▁
+wandb:                       val_img_ssim_pred ▁
+wandb:              val_img_ssim_reconstructed ▁
+wandb:                                val_loss ▁
+wandb:                         val_lyap_V_mean ▁
+wandb:                     val_lyap_V_progress ▁
+wandb:                   val_lyap_V_transverse ▁
+wandb:                     val_lyap_chord_norm ▁
+wandb:                       val_lyap_lag_rate ▁
+wandb:                       val_lyap_p_over_L ▁
+wandb:                  val_lyap_raw_violation ▁
+wandb:                     val_lyap_valid_frac ▁
+wandb:                      val_lyap_viol_rate ▁
+wandb:     val_lyapunov_loss_used_for_training ▁
+wandb:                              val_z_loss ▁
+wandb:                  val_z_proprio_err_full ▁
+wandb:                  val_z_proprio_err_pred ▁
+wandb:               val_z_proprio_err_rollout ▁
+wandb:   val_z_proprio_err_rollout_1framestart ▁
+wandb:                      val_z_proprio_loss ▁
+wandb:                   val_z_visual_err_full ▁
+wandb:                   val_z_visual_err_pred ▁
+wandb:                val_z_visual_err_rollout ▁
+wandb:    val_z_visual_err_rollout_1framestart ▁
+wandb:                       val_z_visual_loss ▁
+wandb: 
+wandb: Run summary:
+wandb:                                   epoch 1
+wandb:                                    iter 0
+wandb:                 train_decoder_loss_pred 0.07583
+wandb:        train_decoder_loss_reconstructed 0.05201
+wandb:           train_decoder_recon_loss_pred 0.07583
+wandb:  train_decoder_recon_loss_reconstructed 0.05201
+wandb:              train_decoder_vq_loss_pred 0.0
+wandb:     train_decoder_vq_loss_reconstructed 0.0
+wandb:              train_geo_V_transverse_max 0.72657
+wandb:             train_geo_V_transverse_mean 0.59689
+wandb:               train_geo_chord_over_path 0.42498
+wandb:                       train_geo_cos_sim -0.31401
+wandb:                     train_geo_curvature 1.31401
+wandb:            train_geo_goal_monotone_rate 0.79416
+wandb:                    train_geo_latent_std 0.15814
+wandb:                  train_geo_p_over_L_mid 0.49901
+wandb:        train_geo_progress_monotone_rate 0.92244
+wandb:                       train_img_l1_pred 0.45368
+wandb:              train_img_l1_reconstructed 0.4537
+wandb:                       train_img_l2_pred 0.25605
+wandb:              train_img_l2_reconstructed 0.25606
+wandb:                    train_img_lpips_pred 0.92887
+wandb:           train_img_lpips_reconstructed 0.92886
+wandb:                      train_img_mse_pred 0.25605
+wandb:             train_img_mse_reconstructed 0.25606
+wandb:                     train_img_psnr_pred 5.91681
+wandb:            train_img_psnr_reconstructed 5.91652
+wandb:                     train_img_ssim_pred 0.04135
+wandb:            train_img_ssim_reconstructed 0.04136
+wandb:                              train_loss 0.51205
+wandb:                       train_lyap_V_mean 0.40854
+wandb:                   train_lyap_V_progress 0.03186
+wandb:                 train_lyap_V_transverse 0.59689
+wandb:                   train_lyap_chord_norm 2.34288
+wandb:                     train_lyap_lag_rate 0.50374
+wandb:                     train_lyap_p_over_L 0.49901
+wandb:                train_lyap_raw_violation 0.02033
+wandb:                   train_lyap_valid_frac 1.0
+wandb:                    train_lyap_viol_rate 0.52151
+wandb:   train_lyapunov_loss_used_for_training 0.25231
+wandb:                            train_z_loss 0.43481
+wandb:                train_z_proprio_err_full 1.1267
+wandb:               train_z_proprio_err_next1 nan
+wandb:                train_z_proprio_err_pred 0.96424
+wandb:             train_z_proprio_err_rollout 0.70501
+wandb: train_z_proprio_err_rollout_1framestart 0.8015
+wandb:                    train_z_proprio_loss 0.40757
+wandb:                 train_z_visual_err_full 0.8213
+wandb:                train_z_visual_err_next1 nan
+wandb:                 train_z_visual_err_pred 0.82382
+wandb:              train_z_visual_err_rollout 1.60084
+wandb:  train_z_visual_err_rollout_1framestart 1.72374
+wandb:                     train_z_visual_loss 0.46887
+wandb:                   val_decoder_loss_pred 0.01311
+wandb:          val_decoder_loss_reconstructed 0.00253
+wandb:             val_decoder_recon_loss_pred 0.01311
+wandb:    val_decoder_recon_loss_reconstructed 0.00253
+wandb:                val_decoder_vq_loss_pred 0.0
+wandb:       val_decoder_vq_loss_reconstructed 0.0
+wandb:                val_geo_V_transverse_max 0.70846
+wandb:               val_geo_V_transverse_mean 0.54556
+wandb:                 val_geo_chord_over_path 0.43631
+wandb:                         val_geo_cos_sim -0.29842
+wandb:                       val_geo_curvature 1.29842
+wandb:              val_geo_goal_monotone_rate 0.83617
+wandb:                      val_geo_latent_std 0.12377
+wandb:                    val_geo_p_over_L_mid 0.52145
+wandb:          val_geo_progress_monotone_rate 0.92708
+wandb:                         val_img_l1_pred 0.07301
+wandb:                val_img_l1_reconstructed 0.03232
+wandb:                         val_img_l2_pred 0.01265
+wandb:                val_img_l2_reconstructed 0.00253
+wandb:                      val_img_lpips_pred 0.44505
+wandb:             val_img_lpips_reconstructed 0.40137
+wandb:                        val_img_mse_pred 0.01265
+wandb:               val_img_mse_reconstructed 0.00253
+wandb:                       val_img_psnr_pred 18.97785
+wandb:              val_img_psnr_reconstructed 25.9711
+wandb:                       val_img_ssim_pred 0.68415
+wandb:              val_img_ssim_reconstructed 0.78292
+wandb:                                val_loss 0.36832
+wandb:                         val_lyap_V_mean 0.37347
+wandb:                     val_lyap_V_progress 0.02929
+wandb:                   val_lyap_V_transverse 0.54556
+wandb:                     val_lyap_chord_norm 1.81338
+wandb:                       val_lyap_lag_rate 0.45739
+wandb:                       val_lyap_p_over_L 0.52145
+wandb:                  val_lyap_raw_violation 0.01857
+wandb:                     val_lyap_valid_frac 1.0
+wandb:                      val_lyap_viol_rate 0.5303
+wandb:     val_lyapunov_loss_used_for_training 0.24546
+wandb:                              val_z_loss 0.34124
+wandb:                  val_z_proprio_err_full 0.24236
+wandb:                 val_z_proprio_err_next1 nan
+wandb:                  val_z_proprio_err_pred 0.27673
+wandb:               val_z_proprio_err_rollout 0.59637
+wandb:   val_z_proprio_err_rollout_1framestart 0.73438
+wandb:                      val_z_proprio_loss 0.31908
+wandb:                   val_z_visual_err_full 0.37049
+wandb:                  val_z_visual_err_next1 nan
+wandb:                   val_z_visual_err_pred 0.3765
+wandb:                val_z_visual_err_rollout 1.63151
+wandb:    val_z_visual_err_rollout_1framestart 1.69227
+wandb:                       val_z_visual_loss 0.36894
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /project/khanhnt/JEPA/temporal-straightening/checkpoints_smoke/test/umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05/wandb/offline-run-20261009_101917-60qz2uxv
+wandb: Find logs at: ./wandb/offline-run-20261009_101917-60qz2uxv/logs
