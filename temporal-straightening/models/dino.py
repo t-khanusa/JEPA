@@ -7,6 +7,11 @@ from pathlib import Path
 torch.hub._validate_not_a_forked_repo=lambda a,b,c: True
 
 logger = logging.getLogger(__name__)
+
+# Upstream main uses PEP 604 unions (float | None), which require Python 3.10+.
+DINOV2_HUB_REPO = "facebookresearch/dinov2:b48308a"
+
+
 class GlobalProjector(nn.Module):
     def __init__(
         self,
@@ -118,7 +123,7 @@ class DinoV2Encoder(nn.Module):
     ):
         super().__init__()
         self.name = name
-        self.base_model = torch.hub.load("facebookresearch/dinov2", name)
+        self.base_model = torch.hub.load(DINOV2_HUB_REPO, name, skip_validation=True)
         self.feature_key = feature_key
         self.emb_dim = self.base_model.num_features
         self.projector_name = projector

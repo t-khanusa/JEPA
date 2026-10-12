@@ -384,11 +384,7 @@ class VWorldModel(nn.Module):
             h_agg = None
             if self.lyapunov is not None:
                 h_agg = self.agg_latents(self.visual_only(z))
-                h_pred = None
-                if self.lyapunov.rollout_weight > 0 and self.num_pred == 1 and h_agg.shape[1] >= 3:
-                    h_hat = self.agg_latents(self.visual_only(z_pred[:, : h_agg.shape[1] - 2]))
-                    h_pred = torch.cat([h_agg[:, :1], h_hat, h_agg[:, -1:].detach()], dim=1)
-                lyap_loss, lyap_logs = self.lyapunov(h_agg, h_pred=h_pred)
+                lyap_loss, lyap_logs = self.lyapunov(h_agg)
                 loss = loss + lyap_loss * self.straighten_scale
                 loss_components["lyapunov_loss_used_for_training"] = lyap_loss
                 loss_components.update(lyap_logs)

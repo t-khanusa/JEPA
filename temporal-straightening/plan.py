@@ -11,6 +11,7 @@ import logging
 import warnings
 import numpy as np
 import submitit
+from hydra.utils import get_original_cwd
 from itertools import product
 from pathlib import Path
 from einops import rearrange
@@ -455,10 +456,12 @@ def planning_main(cfg_dict):
 
     ckpt_base_path = cfg_dict["ckpt_base_path"]
     model_name = cfg_dict.get("model_name")
-    if ckpt_base_path.startswith("/"):
+    if not os.path.isabs(ckpt_base_path):
+        ckpt_base_path = os.path.join(get_original_cwd(), ckpt_base_path)
+    if os.path.isfile(os.path.join(ckpt_base_path, "hydra.yaml")):
         model_path = ckpt_base_path
     else:
-        model_path = f"{ckpt_base_path}/{cfg_dict['model_name']}/"
+        model_path = os.path.join(ckpt_base_path, model_name)
     model_path = os.path.abspath(model_path)
     with open(os.path.join(model_path, "hydra.yaml"), "r") as f:
         model_cfg = OmegaConf.load(f)
@@ -480,8 +483,9 @@ def planning_main(cfg_dict):
     t_after_model = time.perf_counter()
     print(f"[timing] setup_model_s={t_after_model - t_start:.3f}", flush=True)
 
-    # use dummy vector env for wall and deformable envs
-    if model_cfg.env.name == "wall" or model_cfg.env.name == "deformable_env":
+    # MuJoCo + SubprocVectorEnv often crashes (EGL/OpenGL in forked workers).
+    serial_env_names = {"wall", "deformable_env", "point_maze", "point_maze_medium"}
+    if model_cfg.env.name in serial_env_names:
         from env.serial_vector_env import SerialVectorEnv
         env = SerialVectorEnv(
             [
