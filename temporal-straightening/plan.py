@@ -140,8 +140,12 @@ class PlanWorkspace:
         self.action_dim = self.dset.action_dim * self.frameskip
         self.debug_dset_init = cfg_dict["debug_dset_init"]
 
+        objective_kwargs = {}
+        if str(cfg_dict["objective"].get("_target_", "")).endswith("create_lyapunov_objective_fn"):
+            objective_kwargs["wm"] = wm  # Lyapunov objectives measure energies in encoder.agg space
         objective_fn = hydra.utils.call(
             cfg_dict["objective"],
+            **objective_kwargs,
         )
 
         self.data_preprocessor = Preprocessor(

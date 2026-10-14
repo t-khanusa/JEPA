@@ -149,19 +149,6 @@ Train xong 2026-10-10 17:01 / 17:11 UTC (`logs/aggcos_vs_lyap_20261010_015554/`)
 
 So với Reach: heading λ=0.1 thua riêng 7 / thắng riêng 10 (p=0.63); λ=0.2 thua riêng 8 / thắng riêng 11 (p=0.65). Hai λ heading hoà nhau 9/9 (p=1). Screen offline (mục 5.3) không dự báo được planning: heading thua aggcos có ý nghĩa và không hơn Reach.
 
-Đối chiếu setting (2026-10-12): cả 40 log có cùng `plan_gd.yaml` (mtime 2026-10-07), `model_epoch=20`, `eval_seed = seed·n+1` cho n=0..4, thư mục `gH25_dset/..._gd_lr0.1_an0_opt100_objlast_initzero`. Train chỉ khác chuỗi `training.straighten`; block `lyapunov` giống hệt, λ=0.2 nằm trong chuỗi `lyapheading2e-1`. Episode được `random.randint` sau `seed(planning_seed)`; split val dùng `torch.Generator` cục bộ seed 42. `plan_targets.pkl` của seed 1000 (ảnh, state, action) giống nhau từng bit giữa Reach, heading λ=0.1 và λ=0.2. File của aggcos trên đĩa là seed 100 vì seed đó được chạy lại sau cùng, nên không so ảnh trực tiếp được; đường sample không phụ thuộc weight.
-
-Hình học agg ở epoch 20 (wandb summary), cùng metric `geo_*`:
-
-| | latent std | cos bước liên tiếp | chord/path | V_transverse | V_progress |
-|---|---:|---:|---:|---:|---:|
-| aggcos | 0.204 | 0.464 | 0.787 | — | — |
-| lyapreach | 0.102 | 0.135 | 0.668 | 0.281 | 0.058 |
-| lyapheading λ=0.1 | 0.043 | 0.018 | 0.593 | 0.354 | — |
-| lyapheading λ=0.2 | 0.041 | 0.012 | 0.589 | 0.361 | — |
-
-Progress của Reach đã đạt lịch (val `p/L` = 0.505, lag rate 0.51) nhưng nhỏ hơn transverse ~5 lần. Heading không có số hạng quãng đường; val `lyap_heading_cos` = 0.55 và backtrack còn 6.8%.
-
 Lịch sử từ repo cũ (`/project/khanhnt/temporal-straightening`, xem `LYAPUNOV_TONG_HOP.md`, `research/LYAPUNOV_DESIGN_EXPERIMENT_SUMMARY.md`, `research/NEXT_LYAPUNOV_BEAT_TS_2026_10_09.md`, `research/results/frozen_pilot_20260905_v2/REPORT.md`):
 
 | Thiết kế | Kết quả | Ghi chú |
@@ -177,7 +164,7 @@ Insight chung: success bám theo **imagined progress** (rollout của predictor 
 
 ## 6. Hướng đề xuất tiếp theo
 
-1. **`lyapheading` không đạt mục tiêu.** 34/50 ở cả hai λ, thua aggcos 44/50 (McNemar p=0.006 và 0.021) và không khác Reach. Trên agg nó còn kém Reach: std 0.043 so với 0.102 (aggcos 0.204), cosine bước liên tiếp 0.02 so với 0.13 (aggcos 0.46). Progress term của Reach không phải chỗ hỏng — nó đã bám lịch; transverse/`L^2` mới là phần lớn của V. Đo `diagnose_scale.py` trên patch (không gian planner) vẫn còn thiếu nếu muốn nối std của agg với NMSE của predictor.
+1. **`lyapheading` không đạt mục tiêu.** 34/50 ở cả hai λ, thua aggcos 44/50 (McNemar p=0.006 và 0.021) và không khác Reach. Việc tiếp theo là đo cùng bộ `diagnose_scale.py` / `diagnose_mechanism.py` trên checkpoint epoch 20 của heading, để xem nó nén scale và làm phẳng imagined cost như Reach, hay straight trên agg nhưng predictor vẫn kém.
 2. Không chạy ablation γ / softplus / heading-so-với-bước-liền-trước khi chưa có một năng lượng ≥ aggcos. Nếu vẫn muốn tách đóng góp sau này:
    - recurrence (γ) so với năng lượng thuần (γ=0, tức mean của V): Lyapunov có thêm giá trị gì ngoài năng lượng?
    - softplus so với ReLU;

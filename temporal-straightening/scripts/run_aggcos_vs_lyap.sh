@@ -12,9 +12,9 @@ export DATASET_DIR="${DATASET_DIR:-/project/khanhnt/temporal-straightening/data}
 export PYTHONNOUSERSITE=1
 ENV="${ENV:-point_maze}"
 BASELINE="${BASELINE:-aggcos1e-1}"
-LYAP_RUNS="${LYAP_RUNS:-lyapreach1e-1}"
-read -r -a GPU_LIST <<< "${GPUS:-1 2}"
-RUNS=("$BASELINE" $LYAP_RUNS)
+LYAP_RUNS="${LYAP_RUNS:-lyapreach1e-2}"
+read -r -a GPU_LIST <<< "${GPUS:-2}"
+RUNS=($LYAP_RUNS) #"$BASELINE"
 
 if (( ${#RUNS[@]} > ${#GPU_LIST[@]} )); then
   echo "Need ${#RUNS[@]} GPUs for runs: ${RUNS[*]} (got GPUS=\"${GPU_LIST[*]}\")" >&2
