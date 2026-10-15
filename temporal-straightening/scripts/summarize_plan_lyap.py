@@ -1,6 +1,9 @@
 """Summarize logs/plan_lyap/*.jsonl: success per (model, objective), paired exact McNemar.
 
-  python scripts/summarize_plan_lyap.py [--ref_model aggmlpcos1e-1]
+`last` is the per-episode normalized terminal cost (last / last_0); `last_raw` is the stock
+plan_gd objective and reproduces plan.py runs exactly. --base picks the paired baseline.
+
+  python scripts/summarize_plan_lyap.py [--ref_model aggmlpcos1e-1] [--base last_raw]
 """
 import argparse
 import glob
@@ -30,6 +33,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dir", default=str(REPO / "logs" / "plan_lyap"))
     ap.add_argument("--ref_model", default="aggmlpcos1e-1")
+    ap.add_argument("--base", default="last", help="objective each row is paired against")
     args = ap.parse_args()
 
     S = defaultdict(dict)  # (model, obj) -> {(seed, i): success}
@@ -47,12 +51,12 @@ def main():
                 TERMS[key][k] += v
 
     models = sorted({m for m, _ in S}, key=lambda m: (m != args.ref_model, m))
-    objs = sorted({o for _, o in S}, key=lambda o: (o != "last", o))
-    print(f"{'model':18s} {'objective':18s} {'succ':>7s} {'vs last (L/W, p)':>20s} "
+    objs = sorted({o for _, o in S}, key=lambda o: (o != args.base, o))
+    print(f"{'model':18s} {'objective':18s} {'succ':>7s} {'vs ' + args.base + ' (L/W, p)':>20s} "
           f"{'vs ref-last (L/W, p)':>22s} {'last_norm':>10s} {'lyap':>8s} {'dist':>6s}")
-    ref = S.get((args.ref_model, "last"), {})
+    ref = S.get((args.ref_model, args.base), {})
     for m in models:
-        base = S.get((m, "last"), {})
+        base = S.get((m, args.base), {})
         for o in objs:
             cur = S.get((m, o))
             if not cur:
