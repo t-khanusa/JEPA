@@ -17,8 +17,9 @@ Rollout states z_t, t = 0..T-1 (z_0 encoded, the rest predicted), goal z_g. With
 
 `last` is the plan_gd terminal MSE (visual + alpha_proprio * proprio). It is divided by its
 value at z_0 (detached, per episode) so `weight` is comparable across models whose feature
-scales differ by >10x; with weight = 0 this is the stock objective up to a per-episode
-constant, which Adam on the per-episode actions is invariant to.
+scales differ by >10x. With weight = 0 this has the same minimizer as the stock objective,
+but Adam is invariant to the per-episode constant only while |grad| >> its eps (1e-8), so
+the action iterates can differ; `last_raw` (normalize_last=False) is the stock objective.
 """
 
 import torch
@@ -128,9 +129,14 @@ def create_lyapunov_objective_fn(
 
 
 def parse_objective_spec(spec):
-    """'last' | '<lyap>[_<space>]_w<weight>[_g<gamma>]' -> kwargs, e.g. 'heading_agg_w1', 'cost_w0.1_g1'."""
+    """'last' | 'last_raw' | '<lyap>[_<space>]_w<weight>[_g<gamma>][_raw]' -> kwargs, e.g. 'heading_agg_w1'.
+
+    'raw' turns off the per-episode normalization of the terminal cost (stock plan_gd objective).
+    """
     if spec == "last":
         return {"lyap": "none", "weight": 0.0}
+    if spec == "last_raw":
+        return {"lyap": "none", "weight": 0.0, "normalize_last": False}
     parts = spec.split("_")
     kw = {"lyap": parts[0]}
     for p in parts[1:]:
@@ -142,6 +148,8 @@ def parse_objective_spec(spec):
             kw["gamma"] = float(p[1:])
         elif p == "sp":
             kw["use_softplus"] = True
+        elif p == "raw":
+            kw["normalize_last"] = False
         else:
             raise ValueError(f"Unknown token {p!r} in objective spec {spec!r}")
     return kw
