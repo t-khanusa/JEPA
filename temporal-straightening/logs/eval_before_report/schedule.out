@@ -1,0 +1,7 @@
+Fri Oct 16 05:22:07 AM UTC 2026 A: stopping lr1e-6 runs
+0, 20809 MiB
+1, 1 MiB
+2, 1 MiB
+Fri Oct 16 05:42:20 AM UTC 2026 A done
+Fri Oct 16 06:30:51 AM UTC 2026 B: T6 e16
+Fri Oct 16 06:37:21 AM UTC 2026 B done; C: resuming lr1e-6 runs

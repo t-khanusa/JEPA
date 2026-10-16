@@ -1,0 +1,25 @@
+12:20:57 done plan umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06 e18 rc=0
+12:21:13 done plan umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e17 rc=0
+12:22:06 done scale umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06 e20 rc=0
+12:22:51 done plan umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06 e17 rc=0
+12:22:53 done plan umaze_aggmlpcos1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e17 rc=0
+12:23:45 done scale umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06 e20 rc=0
+12:23:50 done plan umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e17 rc=0
+12:23:51 done plan umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e18 rc=0
+12:24:28 done plan umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06 e19 rc=0
+12:26:02 done plan umaze_aggmlpcos1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e19 rc=0
+12:26:14 done plan umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e19 rc=0
+12:26:22 done plan umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e19 rc=0
+12:26:44 done plan umaze_aggmlpcos1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e18 rc=0
+12:26:53 done plan umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e18 rc=0
+12:27:04 done scale umaze_lyapreach1e-1T6_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e20 rc=0
+12:46:01 done plan umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06 e19 rc=0
+12:46:29 done plan umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06 e17 rc=0
+12:47:17 done plan umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06 e20 rc=0
+12:47:20 done plan umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06 e20 rc=0
+12:47:26 done plan umaze_lyapreach1e-1T6_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e18 rc=0
+12:47:33 done plan umaze_lyapreach1e-1T6_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e17 rc=0
+12:47:48 done plan umaze_lyapreach1e-1_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06 e18 rc=0
+12:48:04 done plan umaze_lyapreach1e-1T6_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e20 rc=0
+12:48:53 done plan umaze_lyapreach1e-1T6_agg32_projchannel_dim8_hw14_sgTrue_lr1e-05 e19 rc=0
+ALL_DONE

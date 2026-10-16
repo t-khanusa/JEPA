@@ -323,7 +323,12 @@ class VWorldModel(nn.Module):
         loss = 0
         loss_components = {}
         decoder_enabled = self.decoder is not None and self.train_decoder
-        z = self.encode(obs, act)
+        # Windows longer than num_hist + num_pred (training.lyap_frames) only extend the
+        # geometry loss; JEPA, VCReg, decoder and geometry logs use the first n frames.
+        n = self.num_hist + self.num_pred
+        z_all = self.encode(obs, act)
+        z = z_all[:, :n]
+        obs = {k: v[:, :n] for k, v in obs.items()}
         z_src = z[:, : self.num_hist, :, :]  # (b, num_hist, num_patches, dim)
         z_tgt = z[:, self.num_pred :, :, :]  # (b, num_hist, num_patches, dim)
         visual_src = obs['visual'][:, : self.num_hist, ...]  # (b, num_hist, 3, img_size, img_size)
@@ -383,13 +388,14 @@ class VWorldModel(nn.Module):
 
             h_agg = None
             if self.lyapunov is not None:
-                h_agg = self.agg_latents(self.visual_only(z))
-                lyap_loss, lyap_logs = self.lyapunov(h_agg)
+                h_agg_all = self.agg_latents(self.visual_only(z_all))
+                h_agg = h_agg_all[:, :n]
+                lyap_loss, lyap_logs = self.lyapunov(h_agg_all)
                 loss = loss + lyap_loss * self.straighten_scale
                 loss_components["lyapunov_loss_used_for_training"] = lyap_loss
                 loss_components.update(lyap_logs)
             elif self.straighten and self.straighten_scale > 0:
-                feats = self.visual_only(z)
+                feats = self.visual_only(z_all)
                 curvature_loss = self.total_curvature(feats, mode=self.curvature_mode)
                 loss = loss + curvature_loss * self.straighten_scale
                 loss_components["curvature_loss_used_for_training"] = curvature_loss

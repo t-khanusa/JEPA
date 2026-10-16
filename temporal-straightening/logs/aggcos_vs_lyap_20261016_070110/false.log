@@ -1,0 +1,81 @@
+/project/khanhnt/JEPA/temporal-straightening/custom_resolvers.py:4: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_path=None)
+[2026-10-16 07:01:14,590][__main__][INFO] - Model saved dir: /project/khanhnt/JEPA/temporal-straightening/checkpoints/test/umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06
+[2026-10-16 07:01:14,767][__main__][INFO] - Accelerate mixed precision: bf16
+[2026-10-16 07:01:14,767][__main__][INFO] - rank: 0  model_name: test/umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06_f5_h3_p1
+[2026-10-16 07:01:14,767][__main__][INFO] - device: cuda   model_name: test/umaze_False_agg32_projchannel_dim8_hw14_sgTrue_lr1e-06_f5_h3_p1
+[2026-10-16 07:01:14,767][__main__][INFO] - Decoder training will start at epoch 1
+[2026-10-16 07:01:14,781][__main__][INFO] - Resuming Wandb run tg2872q0
+wandb: Currently logged in as: khanhnguyenthai-5 (drkhanusa). Use `wandb login --relogin` to force relogin
+Thread SenderThread:
+Traceback (most recent call last):
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/apis/normalize.py", line 25, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 426, in server_settings_introspection
+    for field in res.get("ServerSettingsType", {}).get("fields", [{}])
+AttributeError: 'NoneType' object has no attribute 'get'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/apis/normalize.py", line 25, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 1408, in upsert_run
+    self.server_settings_introspection()
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/apis/normalize.py", line 61, in wrapper
+    raise CommError(message, err).with_traceback(sys.exc_info()[2])
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/apis/normalize.py", line 25, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 426, in server_settings_introspection
+    for field in res.get("ServerSettingsType", {}).get("fields", [{}])
+wandb.errors.CommError: 'NoneType' object has no attribute 'get'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_util.py", line 51, in run
+    self._run()
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_util.py", line 102, in _run
+    self._process(record)
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal.py", line 310, in _process
+    self._sm.send(record)
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/sender.py", line 304, in send
+    send_handler(record)
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/sender.py", line 782, in send_run
+    self._init_run(run, config_value_dict)
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/sender.py", line 808, in _init_run
+    server_run, inserted, server_messages = self._api.upsert_run(
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/apis/normalize.py", line 61, in wrapper
+    raise CommError(message, err).with_traceback(sys.exc_info()[2])
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/apis/normalize.py", line 25, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 1408, in upsert_run
+    self.server_settings_introspection()
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/apis/normalize.py", line 61, in wrapper
+    raise CommError(message, err).with_traceback(sys.exc_info()[2])
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/apis/normalize.py", line 25, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 426, in server_settings_introspection
+    for field in res.get("ServerSettingsType", {}).get("fields", [{}])
+wandb.errors.CommError: 'NoneType' object has no attribute 'get'
+wandb: ERROR Internal wandb error: file data was not synced
+wandb: ERROR Error communicating with wandb process
+wandb: ERROR For more info see: https://docs.wandb.ai/library/init#init-start-error
+Problem at: /project/khanhnt/JEPA/temporal-straightening/train.py 113 __init__
+Error executing job with overrides: ['env=point_maze', 'encoder=dino_channel', 'training.straighten=false', 'training.encoder_lr=1e-6', 'training.epochs=4']
+Traceback (most recent call last):
+  File "/project/khanhnt/JEPA/temporal-straightening/train.py", line 976, in main
+    trainer = Trainer(cfg)
+  File "/project/khanhnt/JEPA/temporal-straightening/train.py", line 113, in __init__
+    self.wandb_run = wandb.init(
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/wandb_init.py", line 1043, in init
+    run = wi.init()
+  File "/opt/anaconda/envs/ts/lib/python3.9/site-packages/wandb/sdk/wandb_init.py", line 691, in init
+    raise UsageError(error_message)
+wandb.errors.UsageError: Error communicating with wandb process
+For more info see: https://docs.wandb.ai/library/init#init-start-error
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

@@ -125,10 +125,15 @@ class Trainer:
 
         seed(cfg.training.seed)
         log.info(f"Loading dataset from {self.cfg.env.dataset.data_path} ...")
+        # Windows hold num_hist + num_pred frames, or training.lyap_frames if longer: the extra
+        # frames only feed the geometry loss (the model slices JEPA/decoder inputs itself).
+        self.jepa_frames = self.cfg.num_hist + self.cfg.num_pred
+        lyap_frames = self.cfg.training.get("lyap_frames", None)
+        self.window_frames = max(self.jepa_frames, int(lyap_frames or 0))
         self.datasets, traj_dsets = hydra.utils.call(
             self.cfg.env.dataset,
             num_hist=self.cfg.num_hist,
-            num_pred=self.cfg.num_pred,
+            num_pred=self.window_frames - self.cfg.num_hist,
             frameskip=self.cfg.frameskip,
         )
 
@@ -249,6 +254,10 @@ class Trainer:
         return ckpt_path, model_name, model_epoch
 
     def load_ckpt(self, filename="model_latest.pth"):
+        # The checkpoint pickles the encoder module, whose classes live in the torch.hub
+        # dinov2 repo; loading it once puts that repo on sys.path (as plan.load_ckpt does).
+        from models.dino import DinoV2Encoder
+        _ = DinoV2Encoder('dinov2_vits14', 'x_norm_patchtokens')
         ckpt = torch.load(filename)
         self._loaded_optim_state = {}
         for k, v in ckpt.items():
@@ -555,6 +564,13 @@ class Trainer:
 
         return logs
 
+    def jepa_window(self, obs, act, state):
+        """First num_hist + num_pred frames: what the JEPA/decoder logging below expects."""
+        n = self.jepa_frames
+        if self.window_frames == n:
+            return obs, act, state
+        return {k: v[:, :n] for k, v in obs.items()}, act[:, :n], state[:, :n]
+
     def train(self):
         for i, data in enumerate(
             tqdm(self.dataloaders["train"], desc=f"Epoch {self.epoch} Train")
@@ -569,6 +585,7 @@ class Trainer:
             z_out, visual_out, visual_reconstructed, loss, loss_components = self.model(
                 obs, act
             )
+            obs, act, state = self.jepa_window(obs, act, state)
 
             self.encoder_optimizer.zero_grad()
             if decoder_active:
@@ -690,6 +707,7 @@ class Trainer:
             z_out, visual_out, visual_reconstructed, loss, loss_components = self.model(
                 obs, act
             )
+            obs, act, state = self.jepa_window(obs, act, state)
 
             loss = self.accelerator.gather_for_metrics(loss).mean()
 
